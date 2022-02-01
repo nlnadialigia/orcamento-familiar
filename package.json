@@ -5,11 +5,19 @@
   "author": "Nadia Ligia <nlnadialigia@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "husky:init": "husky install"
+    "husky:init": "husky install",
+    "commit": "git-cz"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
+    "commitizen": "^4.2.4",
+    "cz-ptbr-changelog": "^1.0.1",
     "husky": "^7.0.4"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-ptbr-changelog"
+    }
   }
 }
