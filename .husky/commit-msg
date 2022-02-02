@@ -1,4 +1,5 @@
 #!/bin/sh
 . "$(dirname "$0")/_/husky.sh"
 
-yarn lint commitlint --edit $1
+yarn lint 
+yarn commitlint --edit $1
