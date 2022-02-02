@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es2021",
+    "outDir": "lib",
+    "strict": true,
+    "resolveJsonModule": true,
+    "moduleResolution": "node",
+    "types": [
+      "node",
+      "jest"
+    ],
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+  },
+  "exclude": [
+    "node_modules",
+    "lib"
+  ],
+  "compileOnSave": true,
+  "include": [
+    "src/",
+    "tests"
+  ]
+}
