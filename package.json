@@ -12,6 +12,8 @@
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
+    "@types/express": "^4.17.13",
+    "@types/mongodb": "^4.0.7",
     "@types/node": "^17.0.14",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",
@@ -29,5 +31,9 @@
     "commitizen": {
       "path": "./node_modules/cz-ptbr-changelog"
     }
+  },
+  "dependencies": {
+    "express": "^4.17.2",
+    "mongodb": "^4.3.1"
   }
 }
