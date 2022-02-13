@@ -2,7 +2,19 @@ import { Request, Response } from 'express';
 import Expense from '../../models/expenses.model';
 
 const getExpensesList = async (req: Request, res: Response) => {
-  res.send('ok');
+  try {
+    const expenses = await Expense.find({}, '-__v');
+
+    if (expenses.length === 0) {
+      res.status(200).json({
+        message: 'Não existem despesas cadastradas.'
+      });
+    } else {
+      res.status(200).json(expenses);
+    }
+  } catch (error) {
+    res.status(500).json({ ERRO: error });
+  }
 };
 
 const createExpense = async (req: Request, res: Response) => {
