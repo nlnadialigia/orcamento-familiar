@@ -1,8 +1,14 @@
 import { Request, Response } from 'express';
 import Income from '../../models/incomes.model';
 
-const getIncomesList = (req: Request, res: Response) => {
-  res.send('Rota GET => Listagem das receitas');
+const getIncomesList = async (req: Request, res: Response) => {
+  try {
+    const incomes = await Income.find();
+
+    res.json(incomes);
+  } catch (error) {
+    res.status(500).json({ erro: error });
+  }
 };
 
 const createIncome = async (req: Request, res: Response) => {
@@ -26,15 +32,15 @@ const createIncome = async (req: Request, res: Response) => {
   }
 };
 
-const findIncomeById = (req: Request, res: Response) => {
+const findIncomeById = async (req: Request, res: Response) => {
   res.send('Rota GET => Busca por ID de uma receita');
 };
 
-const updateIncomeById = (req: Request, res: Response) => {
+const updateIncomeById = async (req: Request, res: Response) => {
   res.send('Rota PUT => Alterar receita por ID');
 };
 
-const deleteIncomeById = (req: Request, res: Response) => {
+const deleteIncomeById = async (req: Request, res: Response) => {
   res.send('Rota DELETE => Deletar receita por ID');
 };
 
