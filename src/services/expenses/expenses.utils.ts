@@ -47,7 +47,23 @@ const createExpense = async (req: Request, res: Response) => {
 };
 
 const findExpenseById = async (req: Request, res: Response) => {
-  res.send('ok');
+  const { id } = req.params;
+
+  try {
+    const expense = await Expense.findById(id, '-__v');
+
+    res.status(200).json(expense);
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'CastError') {
+        res.status(404).json({
+          MESSAGE: 'Despesa não encontrada'
+        });
+        return;
+      }
+    }
+    res.status(500).json({ ERRO: error });
+  }
 };
 
 const updateExpenseById = async (req: Request, res: Response) => {
