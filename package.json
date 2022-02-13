@@ -7,7 +7,8 @@
   "scripts": {
     "husky:init": "husky install",
     "commit": "git-cz",
-    "lint": "eslint . --ext .ts,.js"
+    "lint": "eslint . --ext .ts,.js",
+    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
@@ -25,6 +26,7 @@
     "eslint-plugin-import": "^2.25.4",
     "husky": "^7.0.4",
     "ts-node": "^10.4.0",
+    "ts-node-dev": "^1.1.8",
     "typescript": "^4.5.5"
   },
   "config": {
