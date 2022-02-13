@@ -6,7 +6,9 @@ const getIncomesList = async (req: Request, res: Response) => {
     const incomes = await Income.find({}, '-__v');
 
     if (incomes.length === 0) {
-      res.json({ MESSAGE: 'Nenhum registro encontradao' });
+      res.status(204).json({
+        MESSAGE: 'Nenhum registro encontradao'
+      });
       return;
     }
 

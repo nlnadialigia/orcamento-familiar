@@ -6,8 +6,8 @@ const getExpensesList = async (req: Request, res: Response) => {
     const expenses = await Expense.find({}, '-__v');
 
     if (expenses.length === 0) {
-      res.status(200).json({
-        message: 'Não existem despesas cadastradas.'
+      res.status(204).json({
+        MESSAGE: 'Não existem despesas cadastradas.'
       });
     } else {
       res.status(200).json(expenses);
@@ -30,14 +30,14 @@ const createExpense = async (req: Request, res: Response) => {
     await Expense.create(expense);
 
     res.status(201).json({
-      message: 'Despesa criada com sucesso!',
+      MESSAGE: 'Despesa criada com sucesso!',
       expense
     });
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'ValidationError') {
         res.status(400).json({
-          message: 'Todos os campos são obrigatórios'
+          MESSAGE: 'Todos os campos são obrigatórios'
         });
         return;
       }
@@ -67,7 +67,30 @@ const findExpenseById = async (req: Request, res: Response) => {
 };
 
 const updateExpenseById = async (req: Request, res: Response) => {
-  res.send('ok');
+  const { id } = req.params;
+
+  const { title, value, date } = req.body;
+
+  const expense = { title, value, date };
+
+  try {
+    await Expense.updateOne({ _id: id }, expense);
+
+    res.status(200).json({
+      MESSAGE: 'Despesa atualizada com sucesso',
+      expense
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'CastError') {
+        res.status(404).json({
+          MESSAGE: 'Despesa não encontrada.'
+        });
+        return;
+      }
+    }
+    res.status(500).json({ ERRO: error });
+  }
 };
 
 const deleteExpenseById = async (req: Request, res: Response) => {
