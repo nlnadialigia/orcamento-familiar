@@ -1,9 +1,25 @@
+import Income from '../models/incomes.model';
+
 const getIncomesList = (req: any, res: any) => {
   res.send('Rota GET => Listagem das receitas');
 };
 
-const createIncome = (req: any, res: any) => {
-  res.send('Rota POST => Criação de receita');
+const createIncome = async (req: any, res: any) => {
+  const { title, value, date } = req.body;
+
+  const income = {
+    title,
+    value,
+    date,
+  };
+
+  try {
+    await Income.create(income);
+
+    res.status(201).json({ message: 'Receita inserida com sucesso!' });
+  } catch (error) {
+    res.status(500).json({ erro: error });
+  }
 };
 
 const findIncomeById = (req: any, res: any) => {
