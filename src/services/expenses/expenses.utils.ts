@@ -94,7 +94,25 @@ const updateExpenseById = async (req: Request, res: Response) => {
 };
 
 const deleteExpenseById = async (req: Request, res: Response) => {
-  res.send('ok');
+  const { id } = req.params;
+
+  try {
+    await Expense.findByIdAndDelete({ _id: id });
+
+    res.status(200).json({
+      MESSAGE: 'Despesa deletada com sucesso!'
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'CastError') {
+        res.status(404).json({
+          MESSAGE: 'Despesa não encontrada'
+        });
+        return;
+      }
+    }
+    res.status(500).json({ ERRO: error });
+  }
 };
 
 export {
