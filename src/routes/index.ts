@@ -1,10 +1,9 @@
 import { Router } from 'express';
+import { router as IncomesRoutes } from './incomes.routes';
 
 const router = Router();
 
-router.get('/incomes', (req, res) => {
-  res.send('Rota GET das receitas');
-});
+router.use('/incomes', IncomesRoutes);
 
 export { router };
 
