@@ -1,10 +1,11 @@
-import Income from '../models/incomes.model';
+import { Request, Response } from 'express';
+import Income from '../../models/incomes.model';
 
-const getIncomesList = (req: any, res: any) => {
+const getIncomesList = (req: Request, res: Response) => {
   res.send('Rota GET => Listagem das receitas');
 };
 
-const createIncome = async (req: any, res: any) => {
+const createIncome = async (req: Request, res: Response) => {
   const { title, value, date } = req.body;
 
   const income = {
@@ -16,21 +17,24 @@ const createIncome = async (req: any, res: any) => {
   try {
     await Income.create(income);
 
-    res.status(201).json({ message: 'Receita inserida com sucesso!' });
+    res.status(201).json({
+      message: 'Receita inserida com sucesso!',
+      income
+    });
   } catch (error) {
     res.status(500).json({ erro: error });
   }
 };
 
-const findIncomeById = (req: any, res: any) => {
+const findIncomeById = (req: Request, res: Response) => {
   res.send('Rota GET => Busca por ID de uma receita');
 };
 
-const updateIncomeById = (req: any, res: any) => {
+const updateIncomeById = (req: Request, res: Response) => {
   res.send('Rota PUT => Alterar receita por ID');
 };
 
-const deleteIncomeById = (req: any, res: any) => {
+const deleteIncomeById = (req: Request, res: Response) => {
   res.send('Rota DELETE => Deletar receita por ID');
 };
 

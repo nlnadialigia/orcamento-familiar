@@ -1,9 +1,9 @@
 import { Router } from 'express';
-import { router as IncomesRoutes } from './incomes.routes';
+import { router as routes } from './routes.controllers';
 
 const router = Router();
 
-router.use('/incomes', IncomesRoutes);
+router.use('/', routes);
 
 export { router };
 

@@ -26,6 +26,7 @@
   "rules": {
     "object-curly-spacing": "off",
     "new-cap": "off",
+    "comma-dangle": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
