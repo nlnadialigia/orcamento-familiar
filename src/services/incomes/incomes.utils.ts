@@ -5,9 +5,14 @@ const getIncomesList = async (req: Request, res: Response) => {
   try {
     const incomes = await Income.find({}, '-_id -__v');
 
+    if (incomes.length === 0) {
+      res.json({ MESSAGE: 'Nenhum registro encontradao' });
+      return;
+    }
+
     res.status(200).json(incomes);
   } catch (error) {
-    res.status(500).json({ erro: error });
+    res.status(500).json(error);
   }
 };
 
@@ -28,7 +33,13 @@ const createIncome = async (req: Request, res: Response) => {
       income
     });
   } catch (error) {
-    res.status(500).json({ erro: error });
+    if (error instanceof Error) {
+      if (error.name === 'ValidationError') {
+        res.status(400).json({ ERRO: 'Todos os campos são obrigatórios.' });
+        return;
+      }
+      res.status(500).json({ ERRO: error });
+    }
   }
 };
 
@@ -41,10 +52,10 @@ const findIncomeById = async (req: Request, res: Response) => {
   } catch (err) {
     if (err instanceof Error) {
       if (err.name === 'CastError') {
-        res.status(404).json({ erro: 'Receita não encontrada' });
+        res.status(404).json({ ERRO: 'Receita não encontrada' });
         return;
       }
-      res.status(500).json({ erro: err });
+      res.status(500).json({ ERRO: err });
     }
   }
 };
