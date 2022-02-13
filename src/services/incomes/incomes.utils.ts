@@ -33,7 +33,16 @@ const createIncome = async (req: Request, res: Response) => {
 };
 
 const findIncomeById = async (req: Request, res: Response) => {
-  res.send('Rota GET => Busca por ID de uma receita');
+  const { id } = req.params;
+
+  try {
+    const income = await Income.findById({ _id: id });
+    res.json(income);
+  } catch (error) {
+    res.status(404).json({
+      message: 'Receita não encontrada!',
+    });
+  }
 };
 
 const updateIncomeById = async (req: Request, res: Response) => {
