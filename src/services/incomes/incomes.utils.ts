@@ -83,6 +83,13 @@ const updateIncomeById = async (req: Request, res: Response) => {
     date,
   };
 
+  const search = await FindIncomeMonth(date, title);
+
+  if (search === 'Duplicated') {
+    res.json('Receita já inserida no mês.');
+    return;
+  }
+
   try {
     await Income.updateOne({ _id: id }, income);
 
