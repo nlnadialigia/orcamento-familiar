@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 import Income from '../../models/incomes.model';
+import { FindIncomeMonth } from './incomes.services';
 
 const getIncomesList = async (req: Request, res: Response) => {
   try {
     const incomes = await Income.find({}, '-__v');
 
     if (incomes.length === 0) {
-      res.status(204).json({
-        MESSAGE: 'Nenhum registro encontradao'
+      res.json({
+        MESSAGE: 'Nenhum registro encontrado'
       });
       return;
     }
@@ -24,8 +27,15 @@ const createIncome = async (req: Request, res: Response) => {
   const income = {
     title,
     value,
-    date,
+    date: moment.utc(date),
   };
+
+  const search = await FindIncomeMonth(date, title);
+
+  if (search === 'Duplicated') {
+    res.json('Receita já inserida no mês.');
+    return;
+  }
 
   try {
     await Income.create(income);
@@ -110,8 +120,26 @@ const deleteIncomeById = async (req: Request, res: Response) => {
   }
 };
 
+const deleteAll = async (req: Request, res: Response) => {
+  try {
+    await Income.deleteMany({});
+    res.status(200).json({
+      message: 'Todas as receitas foram removidas!'
+    });
+  } catch (error) {
+    if (error instanceof Error) {
+      if (error.name === 'CastError') {
+        res.status(404).json({ ERRO: 'Não há receitas a serem removidas' });
+        return;
+      }
+      res.status(500).json({ ERRO: error });
+    }
+  }
+};
+
 export {
   createIncome,
+  deleteAll,
   deleteIncomeById,
   findIncomeById,
   getIncomesList,
