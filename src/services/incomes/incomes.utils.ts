@@ -33,7 +33,7 @@ const createIncome = async (req: Request, res: Response) => {
   const search = await FindIncomeMonth(date, title);
 
   if (search === 'Duplicated') {
-    res.json('Receita já inserida no mês.');
+    res.json({ ERRO: 'Receita já inserida no mês.' });
     return;
   }
 
@@ -41,7 +41,7 @@ const createIncome = async (req: Request, res: Response) => {
     await Income.create(income);
 
     res.status(201).json({
-      message: 'Receita inserida com sucesso!',
+      MESSAGE: 'Receita inserida com sucesso!',
       income
     });
   } catch (error) {
@@ -80,13 +80,13 @@ const updateIncomeById = async (req: Request, res: Response) => {
   const income = {
     title,
     value,
-    date,
+    date: moment.utc(date),
   };
 
   const search = await FindIncomeMonth(date, title);
 
   if (search === 'Duplicated') {
-    res.json('Receita já inserida no mês.');
+    res.json({ ERRO: 'Receita já inserida no mês.' });
     return;
   }
 
@@ -94,7 +94,7 @@ const updateIncomeById = async (req: Request, res: Response) => {
     await Income.updateOne({ _id: id }, income);
 
     res.status(200).json({
-      message: 'Receita atualizada com sucesso',
+      MESSAGE: 'Receita atualizada com sucesso',
       income
     });
   } catch (error) {
@@ -114,7 +114,7 @@ const deleteIncomeById = async (req: Request, res: Response) => {
   try {
     await Income.findByIdAndDelete({ _id: id });
     res.status(200).json({
-      message: 'Receita removida com sucesso!'
+      MESSAGE: 'Receita removida com sucesso!'
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -131,7 +131,7 @@ const deleteAll = async (req: Request, res: Response) => {
   try {
     await Income.deleteMany({});
     res.status(200).json({
-      message: 'Todas as receitas foram removidas!'
+      MESSAGE: 'Todas as receitas foram removidas!'
     });
   } catch (error) {
     res.status(500).json({ ERRO: error });
