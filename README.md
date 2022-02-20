@@ -21,6 +21,7 @@
 # Índice
 [Sobre](#id1)<br>
 [Semana 1 - Implementando uma API REST](#id2)<br>
+[Semana 2: Mudanças na API e novas funcionalidades](#id3)<br>
 [Bibliotecas e Ferramentas](#id99)<br>
 
 <br>
@@ -54,6 +55,19 @@ O projeto será desenvolvido em um período de 4 semanas, sendo disponibilizadas
 * 📝 Detalhamento de receita
 * 📝 Atualização de receita
 * 📝 Exclusão de receita
+
+<br>
+
+## [📌 Semana 2: Mudanças na API e novas funcionalidades](boards/semana-2.md)
+
+* 📝 Mudança no Banco de dados
+* 📝 Categorização de despesas
+* 📝 Busca de receitas
+* 📝 Busca de despesas
+* 📝 Listagem de receitas por mês
+* 📝 Listagem de despesas por mês
+* 📝 Resumo do mês
+* 📝 Testes automatizados
 
 <br>
 
