@@ -5,8 +5,15 @@ import Income from '../../models/incomes.model';
 import { FindIncomeMonth } from './incomes.services';
 
 const getIncomesList = async (req: Request, res: Response) => {
+  const { title } = req.query;
+  let incomes;
+
   try {
-    const incomes = await Income.find({}, '-__v');
+    if (title) {
+      incomes = await Income.find({ title: title }, '-__v');
+    } else {
+      incomes = await Income.find({}, '-__v');
+    }
 
     if (incomes.length === 0) {
       res.json({
