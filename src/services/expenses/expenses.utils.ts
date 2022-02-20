@@ -3,6 +3,17 @@ import moment from 'moment';
 import Expense from '../../models/expenses.model';
 import { FindExpenseMonth } from './expenses.services';
 
+const categoryTypes = [
+  'Alimentação',
+  'Saúde',
+  'Moradia',
+  'Transporte',
+  'Educação',
+  'Lazer',
+  'Imprevistos',
+  'Outras'
+];
+
 const getExpensesList = async (req: Request, res: Response) => {
   try {
     const expenses = await Expense.find({}, '-__v');
@@ -20,18 +31,26 @@ const getExpensesList = async (req: Request, res: Response) => {
 };
 
 const createExpense = async (req: Request, res: Response) => {
-  const { title, value, date } = req.body;
+  const { title, value, date, category } = req.body;
 
   const expense = {
     title,
     value,
     date: moment.utc(date),
+    category
   };
 
   const search = await FindExpenseMonth(date, title);
   if (search === 'Duplicated') {
     res.status(400).json({
       ERRO: 'Despesa já existe no mês'
+    });
+    return;
+  }
+
+  if (!categoryTypes.includes(expense.category)) {
+    res.status(400).json({
+      ERRO: `Tipos de categorias permitidos: ${categoryTypes}`
     });
     return;
   }
@@ -79,18 +98,26 @@ const findExpenseById = async (req: Request, res: Response) => {
 const updateExpenseById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
-  const { title, value, date } = req.body;
+  const { title, value, date, category } = req.body;
 
   const expense = {
     title,
     value,
-    date: moment.utc(date)
+    date: moment.utc(date),
+    category
   };
 
   const search = await FindExpenseMonth(date, title);
   if (search === 'Duplicated') {
     res.status(400).json({
       ERRO: 'Despesa já existe no mês'
+    });
+    return;
+  }
+
+  if (!categoryTypes.includes(expense.category)) {
+    res.status(400).json({
+      ERRO: `Tipos de categorias permitidos: ${categoryTypes}`
     });
     return;
   }
