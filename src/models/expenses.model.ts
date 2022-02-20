@@ -6,6 +6,7 @@ const ExpenseSchema = new Schema({
   title: { type: String, required: true },
   value: { type: Number, required: true },
   date: { type: Date, required: true },
+  category: { type: String, default: 'Outras' }
 });
 
 
