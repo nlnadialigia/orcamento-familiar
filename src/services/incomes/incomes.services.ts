@@ -1,5 +1,6 @@
+import moment from 'moment';
 import Income from '../../models/incomes.model';
-import { FindMonth } from '../../utils/find.month';
+import { FindMonth } from '../../utils/custom.date';
 
 async function FindIncomeMonth(date: moment.MomentInput, title: string) {
   let response = 'Not found';

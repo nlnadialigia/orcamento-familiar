@@ -81,6 +81,10 @@ const findIncomeById = async (req: Request, res: Response) => {
   }
 };
 
+const findIncomeByMonth = async (req: Request, res: Response) => {
+  res.send('LISTAGEM DE RECEITAS POR MÊS');
+};
+
 const updateIncomeById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -153,6 +157,7 @@ export {
   createIncome,
   deleteAll,
   deleteIncomeById,
+  findIncomeByMonth,
   findIncomeById,
   getIncomesList,
   updateIncomeById,
