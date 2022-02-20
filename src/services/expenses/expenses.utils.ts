@@ -3,17 +3,7 @@ import moment from 'moment';
 import Expense from '../../models/expenses.model';
 import { FindDuplicatedField } from '../../utils';
 import { FilterDate } from '../../utils/filter.data';
-
-const categoryTypes = [
-  'Alimentação',
-  'Saúde',
-  'Moradia',
-  'Transporte',
-  'Educação',
-  'Lazer',
-  'Imprevistos',
-  'Outras'
-];
+import { categoryTypes } from './categories.type';
 
 const getExpensesList = async (req: Request, res: Response) => {
   const { title } = req.query;
