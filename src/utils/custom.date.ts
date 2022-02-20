@@ -6,7 +6,7 @@ function Month(date: moment.MomentInput) {
 }
 
 function Year(date: moment.MomentInput) {
-  return moment.utc(date).get('year') + 1;
+  return moment.utc(date).get('year');
 }
 
 export { Month, Year };
