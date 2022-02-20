@@ -33,7 +33,9 @@ const createIncome = async (req: Request, res: Response) => {
   const search = await FindIncomeMonth(date, title);
 
   if (search === 'Duplicated') {
-    res.json({ ERRO: 'Receita já inserida no mês.' });
+    res.status(400).json({
+      ERRO: 'Receita já inserida no mês.'
+    });
     return;
   }
 
@@ -86,7 +88,9 @@ const updateIncomeById = async (req: Request, res: Response) => {
   const search = await FindIncomeMonth(date, title);
 
   if (search === 'Duplicated') {
-    res.json({ ERRO: 'Receita já inserida no mês.' });
+    res.status(400).json({
+      ERRO: 'Receita já inserida no mês.'
+    });
     return;
   }
 

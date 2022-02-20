@@ -1,5 +1,7 @@
 import { Request, Response } from 'express';
+import moment from 'moment';
 import Expense from '../../models/expenses.model';
+import { FindExpenseMonth } from './expenses.services';
 
 const getExpensesList = async (req: Request, res: Response) => {
   try {
@@ -23,8 +25,16 @@ const createExpense = async (req: Request, res: Response) => {
   const expense = {
     title,
     value,
-    date,
+    date: moment.utc(date),
   };
+
+  const search = await FindExpenseMonth(date, title);
+  if (search === 'Duplicated') {
+    res.status(400).json({
+      ERRO: 'Despesa já existe no mês'
+    });
+    return;
+  }
 
   try {
     await Expense.create(expense);
@@ -37,7 +47,7 @@ const createExpense = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       if (error.name === 'ValidationError') {
         res.status(400).json({
-          MESSAGE: 'Todos os campos são obrigatórios'
+          ERRO: 'Todos os campos são obrigatórios'
         });
         return;
       }
@@ -57,7 +67,7 @@ const findExpenseById = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       if (error.name === 'CastError') {
         res.status(404).json({
-          MESSAGE: 'Despesa não encontrada'
+          ERRO: 'Despesa não encontrada'
         });
         return;
       }
@@ -71,7 +81,19 @@ const updateExpenseById = async (req: Request, res: Response) => {
 
   const { title, value, date } = req.body;
 
-  const expense = { title, value, date };
+  const expense = {
+    title,
+    value,
+    date: moment.utc(date)
+  };
+
+  const search = await FindExpenseMonth(date, title);
+  if (search === 'Duplicated') {
+    res.status(400).json({
+      ERRO: 'Despesa já existe no mês'
+    });
+    return;
+  }
 
   try {
     await Expense.updateOne({ _id: id }, expense);
@@ -106,7 +128,7 @@ const deleteExpenseById = async (req: Request, res: Response) => {
     if (error instanceof Error) {
       if (error.name === 'CastError') {
         res.status(404).json({
-          MESSAGE: 'Despesa não encontrada'
+          ERRO: 'Despesa não encontrada'
         });
         return;
       }
