@@ -15,8 +15,15 @@ const categoryTypes = [
 ];
 
 const getExpensesList = async (req: Request, res: Response) => {
+  const { title } = req.query;
+  let expenses;
+
   try {
-    const expenses = await Expense.find({}, '-__v');
+    if (title) {
+      expenses = await Expense.find({ title: title }, '-__v');
+    } else {
+      expenses = await Expense.find({}, '-__v');
+    }
 
     if (expenses.length === 0) {
       res.json({
