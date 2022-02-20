@@ -40,8 +40,6 @@ Principais funcionalidades a serem implementadas são:
 * Implementação de base de dados para persistência das informações;
 * Serviço de autenticação/autorização para restringir acesso às informações.
 
-O projeto será desenvolvido em um período de 4 semanas, sendo disponibilizadas tarefas a serem executadas as 3 primeiras semanas, deixando a última semana para os ajustes necessários e tarefas pendentes.
-
 <br>
 
 <div id="id2"></div>
