@@ -1,9 +1,11 @@
-import Income from '../../models/incomes.model';
-import { Month, Year } from '../../utils/custom.date';
+/* eslint-disable indent */
+import { Month, Year } from '.';
 
-async function FindIncomeMonth(date: moment.MomentInput, title: string) {
+async function FindDuplicatedField(
+  date: moment.MomentInput, title: string, model: any
+) {
   let response = 'Not found';
-  const incomes = await Income.find({
+  const incomes = await model.find({
     title: title,
   });
 
@@ -11,10 +13,7 @@ async function FindIncomeMonth(date: moment.MomentInput, title: string) {
     for (let i = 0; i < incomes.length; i++) {
       const element = incomes[i].date;
       const elementMonth = Month(element);
-      console.log(`ElementMonth: ${elementMonth}`);
-
       const elementYear = Year(element);
-      console.log(`ElementYear: ${elementYear}`);
       if (elementMonth === Month(date) && elementYear === Year(date)) {
         response = 'Duplicated';
       }
@@ -24,4 +23,4 @@ async function FindIncomeMonth(date: moment.MomentInput, title: string) {
   return response;
 }
 
-export { FindIncomeMonth };
+export { FindDuplicatedField };
