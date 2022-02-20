@@ -3,9 +3,21 @@ import mongoose from 'mongoose';
 const Schema = mongoose.Schema;
 
 const IncomeSchema = new Schema({
-  title: { type: String, required: true },
-  value: { type: Number, required: true },
-  date: { type: Date, required: true },
+  title: {
+    type: String,
+    $exists: true,
+    required: true
+  },
+  value: {
+    type: Number,
+    $exists: true,
+    required: true
+  },
+  date: {
+    type: Date,
+    $exists: true,
+    required: true
+  },
 });
 
 

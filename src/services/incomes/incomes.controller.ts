@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createIncome,
+  deleteAll,
   deleteIncomeById,
   findIncomeById,
   getIncomesList,
@@ -14,5 +15,6 @@ router.get('/:id', findIncomeById);
 router.post('/', createIncome);
 router.put('/:id', updateIncomeById);
 router.delete('/:id', deleteIncomeById);
+router.delete('/', deleteAll);
 
 export { router };
