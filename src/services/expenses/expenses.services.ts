@@ -1,5 +1,5 @@
 import Expense from '../../models/expenses.model';
-import { FindMonth } from '../../utils/find.month';
+import { Month, Year } from '../../utils/custom.date';
 
 async function FindExpenseMonth(date: moment.MomentInput, title: string) {
   let response = 'Not found';
@@ -9,9 +9,10 @@ async function FindExpenseMonth(date: moment.MomentInput, title: string) {
 
   if (expenses.length > 0) {
     for (let i = 0; i < expenses.length; i++) {
-      const element = expenses[i];
-      const month = FindMonth(element.date);
-      if (month === FindMonth(date)) {
+      const element = expenses[i].date;
+      const elementMonth = Month(element);
+      const elementYear = Year(element);
+      if (elementMonth === Month(date) && elementYear === Year(date)) {
         response = 'Duplicated';
       }
     }
