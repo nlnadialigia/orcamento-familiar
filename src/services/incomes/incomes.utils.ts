@@ -3,6 +3,7 @@ import moment from 'moment';
 import 'moment/locale/pt-br';
 import Income from '../../models/incomes.model';
 import { FindDuplicatedField } from '../../utils';
+import { FilterDate } from '../../utils/filter.data';
 
 const getIncomesList = async (req: Request, res: Response) => {
   const { title } = req.query;
@@ -82,7 +83,15 @@ const findIncomeById = async (req: Request, res: Response) => {
 };
 
 const findIncomeByMonth = async (req: Request, res: Response) => {
-  res.send('LISTAGEM DE RECEITAS POR MÊS');
+  const { year, month } = req.params;
+
+  const incomes = await FilterDate(Income, parseInt(year), parseInt(month));
+
+  if (incomes.length === 0) {
+    res.json({ MESSAGE: 'Nenhum registro encontrado' });
+  } else {
+    res.json(incomes);
+  }
 };
 
 const updateIncomeById = async (req: Request, res: Response) => {
