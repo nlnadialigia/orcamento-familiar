@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import moment from 'moment';
 import Expense from '../../models/expenses.model';
-import { FindExpenseMonth } from './expenses.services';
+import { FindDuplicatedField } from '../../utils';
 
 const categoryTypes = [
   'Alimentação',
@@ -47,7 +47,7 @@ const createExpense = async (req: Request, res: Response) => {
     category
   };
 
-  const search = await FindExpenseMonth(date, title);
+  const search = await FindDuplicatedField(date, title, Expense);
   if (search === 'Duplicated') {
     res.status(400).json({
       ERRO: 'Despesa já existe no mês'
@@ -114,7 +114,7 @@ const updateExpenseById = async (req: Request, res: Response) => {
     category
   };
 
-  const search = await FindExpenseMonth(date, title);
+  const search = await FindDuplicatedField(date, title, Expense);
   if (search === 'Duplicated') {
     res.status(400).json({
       ERRO: 'Despesa já existe no mês'

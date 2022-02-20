@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import Income from '../../models/incomes.model';
-import { FindIncomeMonth } from './incomes.services';
+import { FindDuplicatedField } from '../../utils';
 
 const getIncomesList = async (req: Request, res: Response) => {
   const { title } = req.query;
@@ -37,7 +37,7 @@ const createIncome = async (req: Request, res: Response) => {
     date: moment.utc(date),
   };
 
-  const search = await FindIncomeMonth(date, title);
+  const search = await FindDuplicatedField(date, title, Income);
 
   if (search === 'Duplicated') {
     res.status(400).json({
@@ -96,7 +96,7 @@ const updateIncomeById = async (req: Request, res: Response) => {
     date: moment.utc(date),
   };
 
-  const search = await FindIncomeMonth(date, title);
+  const search = await FindDuplicatedField(date, title, Income);
 
   if (search === 'Duplicated') {
     res.status(400).json({
