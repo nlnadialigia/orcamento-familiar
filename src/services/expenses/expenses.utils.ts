@@ -6,7 +6,7 @@ const getExpensesList = async (req: Request, res: Response) => {
     const expenses = await Expense.find({}, '-__v');
 
     if (expenses.length === 0) {
-      res.status(204).json({
+      res.json({
         MESSAGE: 'Não existem despesas cadastradas.'
       });
     } else {
@@ -115,8 +115,21 @@ const deleteExpenseById = async (req: Request, res: Response) => {
   }
 };
 
+const deleteAllExpenses = async (req: Request, res: Response) => {
+  try {
+    await Expense.deleteMany({});
+
+    res.status(200).json({
+      MESSAGE: 'Todas as despesas foram removidas.'
+    });
+  } catch (error) {
+    res.status(500).json({ ERRO: error });
+  }
+};
+
 export {
   createExpense,
+  deleteAllExpenses,
   deleteExpenseById,
   findExpenseById,
   getExpensesList,

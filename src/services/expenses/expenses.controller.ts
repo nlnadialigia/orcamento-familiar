@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import {
   createExpense,
+  deleteAllExpenses,
   deleteExpenseById,
   findExpenseById,
   getExpensesList,
@@ -14,5 +15,6 @@ router.get('/:id', findExpenseById);
 router.post('/', createExpense);
 router.put('/:id', updateExpenseById);
 router.delete('/:id', deleteExpenseById);
+router.delete('/', deleteAllExpenses);
 
 export { router };
