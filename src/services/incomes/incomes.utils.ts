@@ -134,13 +134,7 @@ const deleteAll = async (req: Request, res: Response) => {
       message: 'Todas as receitas foram removidas!'
     });
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === 'CastError') {
-        res.status(404).json({ ERRO: 'Não há receitas a serem removidas' });
-        return;
-      }
-      res.status(500).json({ ERRO: error });
-    }
+    res.status(500).json({ ERRO: error });
   }
 };
 
