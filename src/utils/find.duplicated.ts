@@ -5,13 +5,13 @@ async function FindDuplicatedField(
   date: moment.MomentInput, title: string, model: any
 ) {
   let response = 'Not found';
-  const incomes = await model.find({
+  const data = await model.find({
     title: title,
   });
 
-  if (incomes.length > 0) {
-    for (let i = 0; i < incomes.length; i++) {
-      const element = incomes[i].date;
+  if (data.length > 0) {
+    for (let i = 0; i < data.length; i++) {
+      const element = data[i].date;
       const elementMonth = Month(element);
       const elementYear = Year(element);
       if (elementMonth === Month(date) && elementYear === Year(date)) {
