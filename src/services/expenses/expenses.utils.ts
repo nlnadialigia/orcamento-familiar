@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import moment from 'moment';
 import Expense from '../../models/expenses.model';
 import { FindDuplicatedField } from '../../utils';
+import { FilterDate } from '../../utils/filter.data';
 
 const categoryTypes = [
   'Alimentação',
@@ -102,6 +103,20 @@ const findExpenseById = async (req: Request, res: Response) => {
   }
 };
 
+const findExpenseByMonth = async (req: Request, res: Response) => {
+  const { year, month } = req.params;
+
+  const expenses = await FilterDate(Expense, parseInt(year), parseInt(month));
+
+  if (expenses.length === 0) {
+    res.status(404).json({
+      MESSAGE: 'Registros não encontrados.'
+    });
+  } else {
+    res.status(200).json(expenses);
+  }
+};
+
 const updateExpenseById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
@@ -188,6 +203,7 @@ export {
   deleteAllExpenses,
   deleteExpenseById,
   findExpenseById,
+  findExpenseByMonth,
   getExpensesList,
   updateExpenseById,
 };
