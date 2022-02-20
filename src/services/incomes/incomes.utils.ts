@@ -1,13 +1,16 @@
 import { Request, Response } from 'express';
+import moment from 'moment';
+import 'moment/locale/pt-br';
 import Income from '../../models/incomes.model';
+import { FindIncomeMonth } from './incomes.services';
 
 const getIncomesList = async (req: Request, res: Response) => {
   try {
     const incomes = await Income.find({}, '-__v');
 
     if (incomes.length === 0) {
-      res.status(204).json({
-        MESSAGE: 'Nenhum registro encontradao'
+      res.json({
+        MESSAGE: 'Nenhum registro encontrado'
       });
       return;
     }
@@ -24,14 +27,23 @@ const createIncome = async (req: Request, res: Response) => {
   const income = {
     title,
     value,
-    date,
+    date: moment.utc(date),
   };
+
+  const search = await FindIncomeMonth(date, title);
+
+  if (search === 'Duplicated') {
+    res.status(400).json({
+      ERRO: 'Receita já inserida no mês.'
+    });
+    return;
+  }
 
   try {
     await Income.create(income);
 
     res.status(201).json({
-      message: 'Receita inserida com sucesso!',
+      MESSAGE: 'Receita inserida com sucesso!',
       income
     });
   } catch (error) {
@@ -70,14 +82,23 @@ const updateIncomeById = async (req: Request, res: Response) => {
   const income = {
     title,
     value,
-    date,
+    date: moment.utc(date),
   };
+
+  const search = await FindIncomeMonth(date, title);
+
+  if (search === 'Duplicated') {
+    res.status(400).json({
+      ERRO: 'Receita já inserida no mês.'
+    });
+    return;
+  }
 
   try {
     await Income.updateOne({ _id: id }, income);
 
     res.status(200).json({
-      message: 'Receita atualizada com sucesso',
+      MESSAGE: 'Receita atualizada com sucesso',
       income
     });
   } catch (error) {
@@ -97,7 +118,7 @@ const deleteIncomeById = async (req: Request, res: Response) => {
   try {
     await Income.findByIdAndDelete({ _id: id });
     res.status(200).json({
-      message: 'Receita removida com sucesso!'
+      MESSAGE: 'Receita removida com sucesso!'
     });
   } catch (error) {
     if (error instanceof Error) {
@@ -110,8 +131,20 @@ const deleteIncomeById = async (req: Request, res: Response) => {
   }
 };
 
+const deleteAll = async (req: Request, res: Response) => {
+  try {
+    await Income.deleteMany({});
+    res.status(200).json({
+      MESSAGE: 'Todas as receitas foram removidas!'
+    });
+  } catch (error) {
+    res.status(500).json({ ERRO: error });
+  }
+};
+
 export {
   createIncome,
+  deleteAll,
   deleteIncomeById,
   findIncomeById,
   getIncomesList,
