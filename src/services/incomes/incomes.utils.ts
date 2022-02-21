@@ -5,10 +5,14 @@ import Income from '../../models/incomes.model';
 import { FindDuplicatedField } from '../../utils';
 import { FilterDate } from '../../utils/filter.data';
 
+<<<<<<< HEAD
 const getIncomesList = async (req: Request, res: Response) => {
   const { title } = req.query;
   let incomes;
 
+=======
+const getIncomesList = async (req: Request, res: Response): Promise<void> => {
+>>>>>>> main
   try {
     if (title) {
       incomes = await Income.find({ title: title }, '-__v');
@@ -29,7 +33,7 @@ const getIncomesList = async (req: Request, res: Response) => {
   }
 };
 
-const createIncome = async (req: Request, res: Response) => {
+const createIncome = async (req: Request, res: Response): Promise<void> => {
   const { title, value, date } = req.body;
 
   const income = {
@@ -65,7 +69,7 @@ const createIncome = async (req: Request, res: Response) => {
   }
 };
 
-const findIncomeById = async (req: Request, res: Response) => {
+const findIncomeById = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id;
 
   try {
@@ -82,6 +86,7 @@ const findIncomeById = async (req: Request, res: Response) => {
   }
 };
 
+<<<<<<< HEAD
 const findIncomeByMonth = async (req: Request, res: Response) => {
   const { year, month } = req.params;
 
@@ -95,6 +100,9 @@ const findIncomeByMonth = async (req: Request, res: Response) => {
 };
 
 const updateIncomeById = async (req: Request, res: Response) => {
+=======
+const updateIncomeById = async (req: Request, res: Response): Promise<void> => {
+>>>>>>> main
   const { id } = req.params;
 
   const { title, value, date } = req.body;
@@ -132,7 +140,7 @@ const updateIncomeById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteIncomeById = async (req: Request, res: Response) => {
+const deleteIncomeById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   try {
@@ -151,7 +159,7 @@ const deleteIncomeById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteAll = async (req: Request, res: Response) => {
+const deleteAll = async (req: Request, res: Response): Promise<void> => {
   try {
     await Income.deleteMany({});
     res.status(200).json({

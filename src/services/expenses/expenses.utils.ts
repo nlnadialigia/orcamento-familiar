@@ -73,7 +73,7 @@ const createExpense = async (req: Request, res: Response) => {
   }
 };
 
-const findExpenseById = async (req: Request, res: Response) => {
+const findExpenseById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   try {
@@ -154,7 +154,7 @@ const updateExpenseById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteExpenseById = async (req: Request, res: Response) => {
+const deleteExpenseById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   try {
@@ -176,7 +176,7 @@ const deleteExpenseById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteAllExpenses = async (req: Request, res: Response) => {
+const deleteAllExpenses = async (req: Request, res: Response): Promise<void> => {
   try {
     await Expense.deleteMany({});
 

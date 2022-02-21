@@ -7,11 +7,11 @@
     "resolveJsonModule": true,
     "moduleResolution": "node",
     "types": [
-      "node",
+      "node"
     ],
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": true,
+    "skipLibCheck": true
   },
   "exclude": [
     "node_modules",
@@ -19,6 +19,6 @@
   ],
   "compileOnSave": true,
   "include": [
-    "src/",
+    "src/"
   ]
 }

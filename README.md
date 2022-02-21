@@ -15,6 +15,10 @@
     <img src="https://img.shields.io/github/license/nlnadialigia/orcamento-familiar?color=0086D4&style=plastic">
   </a>
 </p>
+<p align="center">
+<a href="https://www.codacy.com/gh/nlnadialigia/orcamento-familiar/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=nlnadialigia/orcamento-familiar&amp;utm_campaign=Badge_Grade">
+  <img src="https://app.codacy.com/project/badge/Grade/04129b7f188a42f1bfc2fa768155dd79"/>
+</a></p>
 
 <br>
 
