@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import 'dotenv/config';
 
 const env = process.env;
