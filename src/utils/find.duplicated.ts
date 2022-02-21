@@ -3,7 +3,7 @@ import { Month, Year } from '.';
 
 async function FindDuplicatedField(
   date: moment.MomentInput, title: string, model: any
-) {
+): Promise<string> {
   let response = 'Not found';
   const incomes = await model.find({
     title: title,

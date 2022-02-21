@@ -3,7 +3,7 @@ import moment from 'moment';
 import Expense from '../../models/expenses.model';
 import { FindDuplicatedField } from '../../utils';
 
-const getExpensesList = async (req: Request, res: Response) => {
+const getExpensesList = async (req: Request, res: Response): Promise<void> => {
   try {
     const expenses = await Expense.find({}, '-__v');
 
@@ -19,7 +19,7 @@ const getExpensesList = async (req: Request, res: Response) => {
   }
 };
 
-const createExpense = async (req: Request, res: Response) => {
+const createExpense = async (req: Request, res: Response): Promise<void> => {
   const { title, value, date } = req.body;
 
   const expense = {
@@ -56,7 +56,7 @@ const createExpense = async (req: Request, res: Response) => {
   }
 };
 
-const findExpenseById = async (req: Request, res: Response) => {
+const findExpenseById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   try {
@@ -76,7 +76,7 @@ const findExpenseById = async (req: Request, res: Response) => {
   }
 };
 
-const updateExpenseById = async (req: Request, res: Response) => {
+const updateExpenseById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   const { title, value, date } = req.body;
@@ -115,7 +115,7 @@ const updateExpenseById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteExpenseById = async (req: Request, res: Response) => {
+const deleteExpenseById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   try {
@@ -137,7 +137,7 @@ const deleteExpenseById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteAllExpenses = async (req: Request, res: Response) => {
+const deleteAllExpenses = async (req: Request, res: Response): Promise<void> => {
   try {
     await Expense.deleteMany({});
 

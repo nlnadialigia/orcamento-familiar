@@ -28,6 +28,12 @@
     "new-cap": "off",
     "require-jsdoc": "off",
     "comma-dangle": "off",
+    "max-len": [
+      "error",
+      {
+        "code": 90
+      }
+    ],
     "import/extensions": [
       "error",
       "ignorePackages",

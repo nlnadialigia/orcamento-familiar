@@ -4,7 +4,7 @@ import 'moment/locale/pt-br';
 import Income from '../../models/incomes.model';
 import { FindDuplicatedField } from '../../utils';
 
-const getIncomesList = async (req: Request, res: Response) => {
+const getIncomesList = async (req: Request, res: Response): Promise<void> => {
   try {
     const incomes = await Income.find({}, '-__v');
 
@@ -21,7 +21,7 @@ const getIncomesList = async (req: Request, res: Response) => {
   }
 };
 
-const createIncome = async (req: Request, res: Response) => {
+const createIncome = async (req: Request, res: Response): Promise<void> => {
   const { title, value, date } = req.body;
 
   const income = {
@@ -57,7 +57,7 @@ const createIncome = async (req: Request, res: Response) => {
   }
 };
 
-const findIncomeById = async (req: Request, res: Response) => {
+const findIncomeById = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id;
 
   try {
@@ -74,7 +74,7 @@ const findIncomeById = async (req: Request, res: Response) => {
   }
 };
 
-const updateIncomeById = async (req: Request, res: Response) => {
+const updateIncomeById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   const { title, value, date } = req.body;
@@ -112,7 +112,7 @@ const updateIncomeById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteIncomeById = async (req: Request, res: Response) => {
+const deleteIncomeById = async (req: Request, res: Response): Promise<void> => {
   const { id } = req.params;
 
   try {
@@ -131,7 +131,7 @@ const deleteIncomeById = async (req: Request, res: Response) => {
   }
 };
 
-const deleteAll = async (req: Request, res: Response) => {
+const deleteAll = async (req: Request, res: Response): Promise<void> => {
   try {
     await Income.deleteMany({});
     res.status(200).json({
