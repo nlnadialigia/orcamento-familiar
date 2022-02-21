@@ -10,13 +10,5 @@ async function TotalData(data: any) {
   return totalData;
 }
 
-// async function ExpensesByCategory(data:any, types:any) {
-//   types.forEach(type => {
-//     data.forEach(element => {
-//       array
-//     });
-//   });
-// }
-
 export { TotalData };
 

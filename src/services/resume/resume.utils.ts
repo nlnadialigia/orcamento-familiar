@@ -13,11 +13,14 @@ async function resumeByMonth(req: Request, res: Response) {
   const totalExpenses = await TotalData(expenses);
   const balance = totalIncomes - totalExpenses;
 
-  res.json({
-    Receitas: totalIncomes,
-    Despesas: totalExpenses,
-    Saldo: balance
-  });
+  const resume = {
+    'Total das receitas': totalIncomes,
+    'Total das despesas': totalExpenses,
+    'Sado Final': balance,
+    'Total de gastos por categorias': {}
+  };
+
+  res.json(resume);
 }
 
 export { resumeByMonth };

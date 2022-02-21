@@ -5,14 +5,10 @@ import Income from '../../models/incomes.model';
 import { FindDuplicatedField } from '../../utils';
 import { FilterDate } from '../../utils/filter.data';
 
-<<<<<<< HEAD
 const getIncomesList = async (req: Request, res: Response) => {
   const { title } = req.query;
   let incomes;
 
-=======
-const getIncomesList = async (req: Request, res: Response): Promise<void> => {
->>>>>>> main
   try {
     if (title) {
       incomes = await Income.find({ title: title }, '-__v');
@@ -86,7 +82,6 @@ const findIncomeById = async (req: Request, res: Response): Promise<void> => {
   }
 };
 
-<<<<<<< HEAD
 const findIncomeByMonth = async (req: Request, res: Response) => {
   const { year, month } = req.params;
 
@@ -100,9 +95,6 @@ const findIncomeByMonth = async (req: Request, res: Response) => {
 };
 
 const updateIncomeById = async (req: Request, res: Response) => {
-=======
-const updateIncomeById = async (req: Request, res: Response): Promise<void> => {
->>>>>>> main
   const { id } = req.params;
 
   const { title, value, date } = req.body;
