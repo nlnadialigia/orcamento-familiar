@@ -19,6 +19,9 @@
 <br>
 
 # Índice
+
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/4a37766bda6346e781fe17d8e1524e88)](https://app.codacy.com/gh/nlnadialigia/orcamento-familiar?utm_source=github.com&utm_medium=referral&utm_content=nlnadialigia/orcamento-familiar&utm_campaign=Badge_Grade_Settings)
+
 [Sobre](#id1)<br>
 [Semana 1 - Implementando uma API REST](#id2)<br>
 [Bibliotecas e Ferramentas](#id99)<br>
