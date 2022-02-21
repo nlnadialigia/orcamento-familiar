@@ -26,6 +26,7 @@
   "rules": {
     "object-curly-spacing": "off",
     "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
     "new-cap": "off",
     "require-jsdoc": "off",
     "comma-dangle": "off",
