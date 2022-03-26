@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../.github/semana01.png" alt="Implementando uma API REST">
+  <img src="../.github/etapa01.png" alt="Implementando uma API REST">
 </p>
 
 # Índice

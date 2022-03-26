@@ -49,7 +49,7 @@ Principais funcionalidades a serem implementadas são:
 
 <div id="id2"></div>
 
-## [📌 Semana 1 - Implementando uma API REST](boards/semana-1.md)
+## [📌 Etapa 1 - Implementando uma API REST](boards/etapa-1.md)
 
 * 📝 Banco de Dados da Aplicação
 * 📝 Cadastro de receita
@@ -57,10 +57,16 @@ Principais funcionalidades a serem implementadas são:
 * 📝 Detalhamento de receita
 * 📝 Atualização de receita
 * 📝 Exclusão de receita
+* 📝 Cadastro de despesa
+* 📝 Listagem de despesas
+* 📝 Detalhamento de despesa
+* 📝 Atualização de despesa
+* 📝 Exclusão de despesa
+* 📝 Testes da API
 
 <br>
 
-## [📌 Semana 2: Mudanças na API e novas funcionalidades](boards/semana-2.md)
+## [📌 Etapa 2: Mudanças na API e novas funcionalidades](boards/etapa-2.md)
 
 * 📝 Mudança no Banco de dados
 * 📝 Categorização de despesas
@@ -70,6 +76,15 @@ Principais funcionalidades a serem implementadas são:
 * 📝 Listagem de despesas por mês
 * 📝 Resumo do mês
 * 📝 Testes automatizados
+
+<br>
+
+## [📌 Etapa 3: Segurança e Deploy da API](boards/etapa-3.md)
+
+* 📝 Qualidade do código
+* 📝 Mudança no Banco de dados
+* 📝 Autenticação
+* 📝 Deploy
 
 <br>
 

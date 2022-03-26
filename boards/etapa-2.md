@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="../.github/semana02.png" alt="Novas Funcionalidades">
+  <img src="../.github/etapa02.png" alt="Novas Funcionalidades">
 </p>
 
 # Índice
