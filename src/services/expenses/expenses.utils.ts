@@ -61,9 +61,11 @@ const createExpense = async (req: Request, res: Response) => {
     });
   } catch (error) {
     if (error instanceof Error) {
+      console.log(error);
       if (error.name === 'ValidationError') {
         res.status(400).json({
-          ERRO: 'Todos os campos são obrigatórios'
+          // ERRO: 'Todos os campos são obrigatórios'
+          ERRO: error.message
         });
         return;
       }
