@@ -57,7 +57,7 @@ const createIncome = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'ValidationError') {
-        res.status(400).json({ERRO: 'Todos os campos são obrigatórios.'});
+        res.status(400).json({ERRO: error.message});
         return;
       }
       res.status(500).json({ERRO: error});
@@ -74,7 +74,7 @@ const findIncomeById = async (req: Request, res: Response): Promise<void> => {
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'CastError') {
-        res.status(404).json({ERRO: 'Receita não encontrada'});
+        res.status(404).json({error});
         return;
       }
       res.status(500).json({ERRO: error});

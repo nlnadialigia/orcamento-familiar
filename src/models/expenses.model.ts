@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import mongoose from 'mongoose';
 
 const Schema = mongoose.Schema;
@@ -25,7 +26,7 @@ const ExpenseSchema = new Schema({
     type: String,
     enum: {
       values: ['Alimentação', 'Saúde', 'Moradia', 'Transporte', 'Educação', 'Lazer', 'Imprevistos', 'Outras'],
-      message: 'Tipo de categoria não permitido'
+      message: 'Tipo de categoria não permitido. Categorias: Alimentação, Saúde, Moradia, Transporte, Educação, Lazer, Imprevistos, Outras'
     },
     default: 'Outras'
   }

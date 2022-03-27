@@ -3,6 +3,7 @@ import moment from 'moment';
 import Expense from '../../models/expenses.model';
 import {FindDuplicatedField} from '../../utils';
 import {FilterDate} from '../../utils/filter.data';
+import {categoryTypes} from './categories.type';
 
 const getExpensesList = async (req: Request, res: Response) => {
   const {title} = req.query;
@@ -45,13 +46,6 @@ const createExpense = async (req: Request, res: Response) => {
     return;
   }
 
-  // if (!categoryTypes.includes(expense.category)) {
-  //   res.status(400).json({
-  //     ERRO: `Tipos de categorias permitidos: ${categoryTypes}`
-  //   });
-  //   return;
-  // }
-
   try {
     await Expense.create(expense);
 
@@ -61,10 +55,8 @@ const createExpense = async (req: Request, res: Response) => {
     });
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error);
       if (error.name === 'ValidationError') {
         res.status(400).json({
-          // ERRO: 'Todos os campos são obrigatórios'
           ERRO: error.message
         });
         return;
@@ -128,12 +120,12 @@ const updateExpenseById = async (req: Request, res: Response) => {
     return;
   }
 
-  // if (!categoryTypes.includes(expense.category)) {
-  //   res.status(400).json({
-  //     ERRO: `Tipos de categorias permitidos: ${categoryTypes}`
-  //   });
-  //   return;
-  // }
+  if (!categoryTypes.includes(expense.category)) {
+    res.status(400).json({
+      ERRO: `Tipos de categorias permitidos: ${categoryTypes}`
+    });
+    return;
+  }
 
   try {
     await Expense.updateOne({_id: id}, expense);
