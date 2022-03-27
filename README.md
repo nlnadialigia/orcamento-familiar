@@ -24,8 +24,10 @@
 
 # Índice
 [Sobre](#id1)<br>
-[Semana 1 - Implementando uma API REST](#id2)<br>
-[Semana 2: Mudanças na API e novas funcionalidades](#id3)<br>
+[Etapa 1 - Implementando uma API REST](#id2)<br>
+[Etapa 2: Mudanças na API e novas funcionalidades](#id3)<br>
+[Etapa 3: Segurança e Deploy da API](#id4)<br>
+[Como baixar e rodar o projeto](#id5)<br>
 [Bibliotecas e Ferramentas](#id99)<br>
 
 <br>
@@ -66,6 +68,8 @@ Principais funcionalidades a serem implementadas são:
 
 <br>
 
+<div id="id3"></div>
+
 ## [📌 Etapa 2: Mudanças na API e novas funcionalidades](boards/etapa-2.md)
 
 * 📝 Mudança no Banco de dados
@@ -79,6 +83,8 @@ Principais funcionalidades a serem implementadas são:
 
 <br>
 
+<div id="id4"></div>
+
 ## [📌 Etapa 3: Segurança e Deploy da API](boards/etapa-3.md)
 
 * 📝 Qualidade do código
@@ -88,10 +94,45 @@ Principais funcionalidades a serem implementadas são:
 
 <br>
 
+<div id="id5"></div>
+
+## 📌 Como baixar e rodar o projeto
+
+- É necessária uma conta no [MongoDB](https://www.mongodb.com/pt-br) e a criação de um projeto.
+
+```bash
+# Clonar o repositório
+
+$ git clone https://github.com/nlnadialigia/orcamento-familiar.git
+
+# Acessar a pasta do projeto
+
+$ cd orcamento-familiar
+
+# Instalar as dependências
+
+$ yarn
+
+# Criar o arquivo de .env com as variáveis de ambiente do .env.example
+
+# Executar o projeto
+
+$ yarn serve
+
+```
+
+
 <div id="id99"></div>
 
 ## 📌 Bibliotecas e Ferramentas
 
 * [Commitlint](https://commitlint.js.org/#/)
 * [Commitizen](https://github.com/commitizen/cz-cli)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Eslint](https://eslint.org/)
+* [Express](https://expressjs.com/pt-br/)
 * [Husky](https://typicode.github.io/husky/#/)
+* [Moment](https://momentjs.com/)
+* [Mongodb](https://www.mongodb.com/)
+* [Mongoose](https://mongoosejs.com/)
+* [Typescript](https://www.typescriptlang.org/)

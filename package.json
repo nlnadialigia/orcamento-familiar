@@ -8,7 +8,7 @@
     "husky:init": "husky install",
     "lint": "eslint . --ext .ts,.js",
     "commit": "yarn lint && yarn build && cz --hook",
-    "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
+    "serve": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
