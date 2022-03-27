@@ -1,4 +1,4 @@
-import { Router } from 'express';
+import {Router} from 'express';
 import {
   createExpense,
   deleteAllExpenses,
@@ -11,12 +11,13 @@ import {
 
 const router = Router();
 
+router.post('/', createExpense);
 router.get('/', getExpensesList);
 router.get('/:id', findExpenseById);
-router.get('/:year/:month', findExpenseByMonth);
-router.post('/', createExpense);
 router.put('/:id', updateExpenseById);
 router.delete('/:id', deleteExpenseById);
 router.delete('/', deleteAllExpenses);
+router.get('/:year/:month', findExpenseByMonth);
 
-export { router };
+export {router};
+
