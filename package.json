@@ -6,8 +6,8 @@
   "license": "MIT",
   "scripts": {
     "husky:init": "husky install",
-    "commit": "git-cz",
     "lint": "eslint . --ext .ts,.js",
+    "commit": "yarn lint && yarn build && cz --hook",
     "dev": "ts-node-dev --respawn --transpile-only src/server.ts"
   },
   "devDependencies": {
