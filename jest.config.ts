@@ -12,9 +12,8 @@ export default async (): Promise<Config.InitialOptions> => {
       'lcov',
       'html'
     ],
-    preset: 'ts-jest',
+    preset: '@shelf/jest-mongodb',
     roots: ['<rootDir>'],
-    testEnvironment: 'node',
     transform: {'.+\\.ts$': 'ts-jest'}
   };
 };
