@@ -10,12 +10,18 @@
     "commit": "yarn lint && yarn build && cz --hook",
     "serve": "ts-node-dev --respawn --transpile-only src/server.ts",
     "test": "jest --coverage --no-cache",
-    "watch": "jest --watch"
+    "teste": "jest --no-cache --detectOpenHandles --runInBand"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.2",
+    "moment": "^2.29.1",
+    "mongodb": "^4.3.1",
+    "mongoose": "^6.2.1"
   },
   "devDependencies": {
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
-    "@shelf/jest-mongodb": "^2.2.1",
     "@types/express": "^4.17.13",
     "@types/jest": "^27.4.1",
     "@types/mongodb": "^4.0.7",
@@ -40,12 +46,5 @@
     "commitizen": {
       "path": "./node_modules/cz-ptbr-changelog"
     }
-  },
-  "dependencies": {
-    "dotenv": "^16.0.0",
-    "express": "^4.17.2",
-    "moment": "^2.29.1",
-    "mongodb": "^4.3.1",
-    "mongoose": "^6.2.1"
   }
 }
