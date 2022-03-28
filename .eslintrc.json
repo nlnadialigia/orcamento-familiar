@@ -2,14 +2,23 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest": true,
+    "jest/globals": true
   },
   "extends": [
     "google",
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "plugin:import/recommended"
+    "plugin:import/recommended",
+    "plugin:jest/style"
+  ],
+  "ignorePatterns": [
+    "/lib/**/*",
+    "jest.config.ts",
+    "/coverage/**",
+    "commitlint.config.js"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -17,7 +26,8 @@
     "sourceType": "module"
   },
   "plugins": [
-    "@typescript-eslint"
+    "@typescript-eslint",
+    "jest"
   ],
   "globals": {
     "Atomics": "readonly",
@@ -42,7 +52,12 @@
       {
         "ts": "never"
       }
-    ]
+    ],
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error",
   },
   "settings": {
     "import/resolver": {
