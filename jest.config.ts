@@ -12,7 +12,8 @@ export default async (): Promise<Config.InitialOptions> => {
       'lcov',
       'html'
     ],
-    preset: '@shelf/jest-mongodb',
+    globalTeardown: "<rootDir>/test-teardown-globals.ts",
+    preset: 'ts-jest',
     roots: ['<rootDir>'],
     testEnvironment: 'node',
     transform: {'.+\\.ts$': 'ts-jest'}
