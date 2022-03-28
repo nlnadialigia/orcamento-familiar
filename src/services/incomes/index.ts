@@ -7,7 +7,7 @@ import {
   findIncomeByMonth,
   getIncomesList,
   updateIncomeById
-} from './incomes.utils';
+} from './incomes.services';
 
 const router = Router();
 

@@ -6,7 +6,7 @@
   "license": "MIT",
   "scripts": {
     "husky:init": "husky install",
-    "lint": "eslint . --ext .ts,.js",
+    "lint": "eslint . --ext .ts,.js --fix",
     "commit": "yarn lint && yarn build && cz --hook",
     "serve": "ts-node-dev --respawn --transpile-only src/server.ts",
     "test": "jest --coverage --no-cache",

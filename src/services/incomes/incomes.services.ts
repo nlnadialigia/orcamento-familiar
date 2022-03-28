@@ -1,20 +1,22 @@
 import {Request, Response} from 'express';
-import moment from 'moment';
 import 'moment/locale/pt-br';
-import {createIncomeQuery} from "../../controller/incomes";
+import {
+  createIncomeQuery,
+  filterIncomesQuery,
+  listIncomesQuery,
+  updateIncomeQuery
+} from '../../controller/incomes';
+import {findByDateQuery, findByIdQuery} from '../../controller/incomes/findIncomes';
 import Income from '../../models/incomes.model';
-import {FindDuplicatedField} from '../../utils';
-import {FilterDate} from '../../utils/filter.data';
+import {searchIncome} from './utils';
 
 const createIncome = async (req: any, res: any): Promise<void> => {
   const {title, value, date} = req.body;
 
-  const search = await FindDuplicatedField(date, title, Income);
+  const search = await searchIncome(title, date);
 
   if (search === 'Duplicated') {
-    res.status(400).json({
-      ERRO: 'Receita já inserida no mês.'
-    });
+    res.status(400).json({ERRO: 'Receita já inserida no mês.'});
     return;
   }
 
@@ -27,7 +29,6 @@ const createIncome = async (req: any, res: any): Promise<void> => {
 
   try {
     const income = await createIncomeQuery(title, value, date);
-
     res.status(201).json({income});
   } catch (error) {
     res.status(500).json({ERRO: error});
@@ -37,21 +38,12 @@ const createIncome = async (req: any, res: any): Promise<void> => {
 const getIncomesList = async (req: Request, res: Response) => {
   const {title} = req.query;
   let incomes;
-
   try {
     if (title) {
-      incomes = await Income.find({title: title}, '-__v');
+      incomes = await filterIncomesQuery(title.toString());
     } else {
-      incomes = await Income.find({}, '-__v');
+      incomes = await listIncomesQuery();
     }
-
-    if (incomes.length === 0) {
-      res.json({
-        MESSAGE: 'Nenhum registro encontrado'
-      });
-      return;
-    }
-
     res.status(200).json(incomes);
   } catch (error) {
     res.status(500).json(error);
@@ -59,33 +51,37 @@ const getIncomesList = async (req: Request, res: Response) => {
 };
 
 
-
 const findIncomeById = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id;
 
   try {
-    const income = await Income.findOne({_id: id});
+    const income = await findByIdQuery(id);
+
     res.status(200).json(income);
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'CastError') {
-        res.status(404).json({error});
+        res.status(404).json({ERRO: 'Receita não encontrada'});
         return;
       }
-      res.status(500).json({ERRO: error});
     }
+    res.status(500).json({ERRO: error});
   }
 };
 
 const findIncomeByMonth = async (req: Request, res: Response) => {
   const {year, month} = req.params;
 
-  const incomes = await FilterDate(Income, parseInt(year), parseInt(month));
+  try {
+    const incomes = await findByDateQuery(year, month);
 
-  if (incomes.length === 0) {
-    res.json({MESSAGE: 'Nenhum registro encontrado'});
-  } else {
-    res.json(incomes);
+    if (incomes.incomes.length === 0) {
+      res.json({MESSAGE: 'Nenhum registro encontrado'});
+    } else {
+      res.json(incomes);
+    }
+  } catch (error) {
+    res.status(500).json({ERRO: error});
   }
 };
 
@@ -94,13 +90,7 @@ const updateIncomeById = async (req: Request, res: Response) => {
 
   const {title, value, date} = req.body;
 
-  const income = {
-    title,
-    value,
-    date: moment.utc(date),
-  };
-
-  const search = await FindDuplicatedField(date, title, Income);
+  const search = await searchIncome(title, date);
 
   if (search === 'Duplicated') {
     res.status(400).json({
@@ -110,15 +100,8 @@ const updateIncomeById = async (req: Request, res: Response) => {
   }
 
   try {
-    await Income.findOneAndUpdate({_id: id}, income, {
-      new: true,
-      upsert: true
-    });
-
-    res.status(200).json({
-      MESSAGE: 'Receita atualizada com sucesso',
-      income
-    });
+    const income = await updateIncomeQuery(id, title, value, date);
+    res.status(200).json({income});
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'CastError') {

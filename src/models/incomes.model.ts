@@ -5,24 +5,15 @@ const Schema = mongoose.Schema;
 const IncomeSchema = new Schema({
   title: {
     type: String,
-    required: {
-      values: true,
-      message: 'Campo obrigatório!'
-    }
+    required: true
   },
   value: {
     type: Number,
-    required: {
-      values: true,
-      message: 'Campo obrigatório!'
-    }
+    required: true
   },
   date: {
     type: Date,
-    required: {
-      values: true,
-      message: 'Campo obrigatório!'
-    }
+    required: true
   },
 });
 
