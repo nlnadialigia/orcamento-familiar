@@ -3,7 +3,11 @@ import Income from '../../models/incomes.model';
 async function listIncomesQuery() {
   try {
     const incomes = await Income.find({}, '-__v');
-    return {incomes};
+    if (incomes.length === 0) {
+      return ({MESSAGE: 'Nenhum registro encontrado.'});
+    } else {
+      return {incomes};
+    }
   } catch (error) {
     return error;
   }
@@ -12,7 +16,12 @@ async function listIncomesQuery() {
 async function filterIncomesQuery(title: string) {
   try {
     const incomes = await Income.find({title: title}, '-__v');
-    return {incomes};
+
+    if (incomes.length === 0) {
+      return ({MESSAGE: 'Nenhum registro encontrado.'});
+    } else {
+      return {incomes};
+    }
   } catch (error) {
     return error;
   }

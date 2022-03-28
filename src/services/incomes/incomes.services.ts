@@ -2,12 +2,13 @@ import {Request, Response} from 'express';
 import 'moment/locale/pt-br';
 import {
   createIncomeQuery,
+  deleteAllIncomesQuery,
+  deleteIncomeQuery,
   filterIncomesQuery,
   listIncomesQuery,
   updateIncomeQuery
 } from '../../controller/incomes';
 import {findByDateQuery, findByIdQuery} from '../../controller/incomes/findIncomes';
-import Income from '../../models/incomes.model';
 import {searchIncome} from './utils';
 
 const createIncome = async (req: any, res: any): Promise<void> => {
@@ -29,7 +30,7 @@ const createIncome = async (req: any, res: any): Promise<void> => {
 
   try {
     const income = await createIncomeQuery(title, value, date);
-    res.status(201).json({income});
+    res.status(201).json(income);
   } catch (error) {
     res.status(500).json({ERRO: error});
   }
@@ -49,7 +50,6 @@ const getIncomesList = async (req: Request, res: Response) => {
     res.status(500).json(error);
   }
 };
-
 
 const findIncomeById = async (req: Request, res: Response): Promise<void> => {
   const id = req.params.id;
@@ -101,7 +101,7 @@ const updateIncomeById = async (req: Request, res: Response) => {
 
   try {
     const income = await updateIncomeQuery(id, title, value, date);
-    res.status(200).json({income});
+    res.status(200).json(income);
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'CastError') {
@@ -117,10 +117,8 @@ const deleteIncomeById = async (req: Request, res: Response): Promise<void> => {
   const {id} = req.params;
 
   try {
-    await Income.findByIdAndDelete({_id: id});
-    res.status(200).json({
-      MESSAGE: 'Receita removida com sucesso!'
-    });
+    const response = await deleteIncomeQuery(id);
+    res.status(200).json(response);
   } catch (error) {
     if (error instanceof Error) {
       if (error.name === 'CastError') {
@@ -134,10 +132,8 @@ const deleteIncomeById = async (req: Request, res: Response): Promise<void> => {
 
 const deleteAllIncomes = async (req: Request, res: Response): Promise<void> => {
   try {
-    await Income.deleteMany({});
-    res.status(200).json({
-      MESSAGE: 'Todas as receitas foram removidas!'
-    });
+    const response = await deleteAllIncomesQuery();
+    res.status(200).json(response);
   } catch (error) {
     res.status(500).json({ERRO: error});
   }
