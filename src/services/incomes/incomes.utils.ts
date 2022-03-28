@@ -1,7 +1,6 @@
 import {Request, Response} from 'express';
 import moment from 'moment';
 import 'moment/locale/pt-br';
-import {createIncome} from "../../controller/incomes/createIncome";
 import Income from '../../models/incomes.model';
 import {FindDuplicatedField} from '../../utils';
 import {FilterDate} from '../../utils/filter.data';
@@ -30,8 +29,14 @@ const getIncomesList = async (req: Request, res: Response) => {
   }
 };
 
-const getIncome = async (req: any, res: any): Promise<void> => {
+const createIncome = async (req: Request, res: Response): Promise<void> => {
   const {title, value, date} = req.body;
+
+  const income = {
+    title,
+    value,
+    date: moment.utc(date),
+  };
 
   const search = await FindDuplicatedField(date, title, Income);
 
@@ -43,18 +48,20 @@ const getIncome = async (req: any, res: any): Promise<void> => {
   }
 
   try {
-    const response = await createIncome(title, value, date);
+    await Income.create(income);
 
-    if (!title || !value || !date) {
-      res.status(400).json({ERRO: 'Todos os campos são obrigatórios!'});
-      return;
-    }
-
-    res.status(200).json({
-      response
-    })
+    res.status(201).json({
+      MESSAGE: 'Receita inserida com sucesso!',
+      income
+    });
   } catch (error) {
-    res.status(500)
+    if (error instanceof Error) {
+      if (error.name === 'ValidationError') {
+        res.status(400).json({ERRO: error.message});
+        return;
+      }
+      res.status(500).json({ERRO: error});
+    }
   }
 };
 
@@ -159,7 +166,7 @@ const deleteAll = async (req: Request, res: Response): Promise<void> => {
 };
 
 export {
-  getIncome,
+  createIncome,
   deleteAll,
   deleteIncomeById,
   findIncomeByMonth,

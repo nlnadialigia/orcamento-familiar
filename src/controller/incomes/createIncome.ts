@@ -17,11 +17,7 @@ async function createIncome(title: string, value: number, date: Date) {
       date: income.date
     };
   } catch (error) {
-    if (error instanceof Error) {
-      if (error.name === 'ValidationError') {
-        return error.message;
-      }
-    }
+
     return error
   }
 };
