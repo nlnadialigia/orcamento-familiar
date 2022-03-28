@@ -1,6 +1,6 @@
 import Income from "../../models/incomes.model";
 
-async function createIncome(title: string, value: number, date: Date) {
+async function createIncomeQuery(title: string, value: number, date: Date) {
   try {
     const income = new Income({
       title,
@@ -22,4 +22,4 @@ async function createIncome(title: string, value: number, date: Date) {
   }
 };
 
-export {createIncome};
+export {createIncomeQuery};
