@@ -1,29 +1,27 @@
-import {Request, Response} from 'express';
-import Expense from '../../models/expenses.model';
-import Income from '../../models/incomes.model';
-import {TotalData} from '../../utils';
-import {FilterDate} from '../../utils/filter.data';
-import {ExpensesByCategory} from './resume.categories';
+import {categoryTypes} from '../expenses/expenses.utils';
 
-async function resumeByMonth(req: Request, res: Response) {
-  const {year, month} = req.params;
-  const incomes = await FilterDate(Income, parseInt(year), parseInt(month));
-  const expenses = await FilterDate(Expense, parseInt(year), parseInt(month));
+const types = categoryTypes;
 
-  const totalIncomes = await TotalData(incomes);
-  const totalExpenses = await TotalData(expenses);
-  const balance = totalIncomes - totalExpenses;
-  const totalByCategory = await ExpensesByCategory(expenses);
+async function ExpensesByCategory(data: any): Promise<any> {
+  const result: any[] = [];
+  for (let i = 0; i < types.length; i++) {
+    const type = types[i];
 
-  const resume = {
-    'Total das receitas': totalIncomes,
-    'Total das despesas': totalExpenses,
-    'Sado Final': balance,
-    'Total de gastos por categorias': totalByCategory
-  };
+    let total = 0;
+    for (let j = 0; j < data.length; j++) {
+      const element = data[j];
+      if (element.category === type) {
+        total += element.value;
+      }
+    }
 
-  res.json(resume);
+    if (total !== 0) {
+      const field = `${type}: ${total}`;
+      result.push(field);
+    }
+  }
+  return result;
 }
 
-export {resumeByMonth};
+export {ExpensesByCategory};
 

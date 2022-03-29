@@ -14,7 +14,8 @@ async function createExpenseQuery(title: string, value: number, date: Date, cate
     expenseId: expense._id,
     title: expense.title,
     value: expense.value,
-    date: expense.date
+    date: expense.date,
+    category: expense.category
   };
 }
 

@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {resumeByMonth} from './resume.utils';
+import {resumeByMonth} from './resume.services';
 
 const router = Router();
 
