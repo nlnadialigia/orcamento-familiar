@@ -7,7 +7,7 @@ import {
   findExpenseByMonth,
   getExpensesList,
   updateExpenseById
-} from './expenses.utils';
+} from './expenses.services';
 
 const router = Router();
 

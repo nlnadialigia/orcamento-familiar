@@ -1,4 +1,4 @@
-import {categoryTypes} from '../expenses/categories.type';
+import {categoryTypes} from '../expenses/expenses.utils';
 
 const types = categoryTypes;
 

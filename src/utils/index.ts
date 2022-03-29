@@ -1,4 +1,4 @@
 export * from './custom.date';
-export * from './find.duplicated';
+export * from './fields';
 export * from './total.data';
 

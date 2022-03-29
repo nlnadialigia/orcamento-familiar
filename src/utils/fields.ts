@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { Month, Year } from '.';
+import {Month, Year} from '.';
 
 async function FindDuplicatedField(
   date: moment.MomentInput, title: string, model: any
@@ -23,4 +23,17 @@ async function FindDuplicatedField(
   return response;
 }
 
-export { FindDuplicatedField };
+function verifyFields() {
+  let title;
+  let value;
+  let date;
+  let existField = false;
+  if (!title || !value || !date) {
+    existField = true;
+  }
+
+  return existField;
+}
+
+export {FindDuplicatedField, verifyFields};
+
