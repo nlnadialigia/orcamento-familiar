@@ -9,7 +9,7 @@ import {
   updateIncomeQuery
 } from '../../controller/incomes';
 import {findByDateQuery, findByIdQuery} from '../../controller/incomes/findIncomes';
-import {searchIncome} from './utils';
+import {searchIncome} from './incomes.utils';
 
 const createIncome = async (req: any, res: any): Promise<void> => {
   const {title, value, date} = req.body;
